@@ -10,11 +10,10 @@ public abstract class VisitorBase<TResult> : IVisitor<TResult>
     /// <summary>
     /// Visits an expression by dynamically invoking the appropriate Visit method with additional parameters.
     /// </summary>
-    /// <typeparam name="TResult">The return type of the Visit method.</typeparam>
     /// <param name="node">The expression to visit.</param>
     /// <param name="additionalParams">Additional parameters to pass to the Visit method.</param>
     /// <returns>The result of the Visit method or null if no matching method is found.</returns>
-    public virtual TResult? Visit(INode node, params object[] additionalParams)
+    public virtual TResult? VisitCore(INode node, params object[] additionalParams)
     {
         // Combine the expression type with the types of additional parameters
         var parameterTypes = new[] { node.GetType() }

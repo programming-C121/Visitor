@@ -1,6 +1,6 @@
 ﻿using BaseVisitor.Interfaces;
 
-namespace Example.ASTNodes;
+namespace Example.AST;
 
 public abstract class BinaryNode : INode
 {

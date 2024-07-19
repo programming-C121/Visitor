@@ -1,5 +1,5 @@
 ﻿using BaseVisitor.Interfaces;
-using Example.ASTNodes;
+using Example.AST;
 using Example.VisitorImplementations;
 
 INode node = new MultiplicationNode(
@@ -11,11 +11,11 @@ INode node = new MultiplicationNode(
 );
 
 var formatVisitor = new FormatVisitor();
-var formatResult = formatVisitor.Visit(node);
+var formatResult = formatVisitor.VisitCore(node);
 Console.WriteLine(formatResult);
 
 Console.WriteLine("=======================================================");
 
 var evaluationVisitor = new EvaluationVisitor();
-var evaluationResult = evaluationVisitor.Visit(node);
+var evaluationResult = evaluationVisitor.VisitCore(node);
 Console.WriteLine($"Resultado: {evaluationResult}");

@@ -2,5 +2,5 @@
 
 public interface IVisitor<out TResult>
 {
-    TResult? Visit(INode node, params object[] additionalParams);
+    TResult? VisitCore(INode node, params object[] additionalParams);
 }

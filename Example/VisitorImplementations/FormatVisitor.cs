@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using BaseVisitor;
-using Example.ASTNodes;
+using Example.AST;
 
 namespace Example.VisitorImplementations;
 
@@ -23,6 +23,7 @@ public class FormatVisitor : VisitorBase<string>
                 sb.AppendLine($"{new string(' ', indentLevel * IndentString.Length)}{line}");
             }
         }
+
         return sb.ToString().TrimEnd();
     }
 
@@ -30,14 +31,14 @@ public class FormatVisitor : VisitorBase<string>
     {
         return $"Number: {node.Value}";
     }
-    
+
     public string Visit(BinaryNode node)
     {
         var sb = new StringBuilder();
         var className = node.GetType().Name;
         sb.AppendLine(className);
-        sb.AppendLine(FormatWithIndent($"{Visit(node.Left)}", 1));
-        sb.AppendLine(FormatWithIndent($"{Visit(node.Right)}", 1));
+        sb.AppendLine(FormatWithIndent($"{VisitCore(node.Left)}", 1));
+        sb.AppendLine(FormatWithIndent($"{VisitCore(node.Right)}", 1));
         return sb.ToString().TrimEnd();
     }
 }

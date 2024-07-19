@@ -1,6 +1,6 @@
 ﻿using BaseVisitor.Interfaces;
 
-namespace Example.ASTNodes;
+namespace Example.AST;
 
 public class NumberNode : INode
 {
