@@ -13,7 +13,7 @@ public abstract class VisitorBase<TResult> : IVisitor<TResult>
     /// <param name="node">The expression to visit.</param>
     /// <param name="additionalParams">Additional parameters to pass to the Visit method.</param>
     /// <returns>The result of the Visit method or null if no matching method is found.</returns>
-    public virtual TResult? VisitCore(INode node, params object[] additionalParams)
+    public virtual TResult? VisitBase(INode node, params object[] additionalParams)
     {
         // Combine the expression type with the types of additional parameters
         var parameterTypes = new[] { node.GetType() }

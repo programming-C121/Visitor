@@ -11,13 +11,13 @@ INode node = new MultiplicationNode(
 );
 
 var formatVisitor = new FormatVisitor();
-var formatResult = formatVisitor.VisitCore(node);
+var formatResult = formatVisitor.VisitBase(node);
 Console.WriteLine(formatResult);
 
 Console.WriteLine("=======================================================");
 
 var semanticCheckVisitor = new SemanticCheckVisitor();
-var semanticCheckResult = semanticCheckVisitor.VisitCore(node);
+var semanticCheckResult = semanticCheckVisitor.VisitBase(node);
 if (semanticCheckResult == null)
 {
     Console.WriteLine("Algo ha salido mal");
@@ -34,5 +34,5 @@ else
 Console.WriteLine("=======================================================");
 
 var evaluationVisitor = new EvaluationVisitor();
-var evaluationResult = evaluationVisitor.VisitCore(node);
+var evaluationResult = evaluationVisitor.VisitBase(node);
 Console.WriteLine($"Resultado de la evaluación: {evaluationResult}");

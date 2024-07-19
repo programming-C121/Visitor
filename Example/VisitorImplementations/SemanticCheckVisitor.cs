@@ -12,8 +12,8 @@ public class SemanticCheckVisitor : VisitorBase<SemanticResult>
 
     public SemanticResult Visit(ArithmeticBinaryNode node)
     {
-        var left = VisitCore(node.Left);
-        var right = VisitCore(node.Right);
+        var left = VisitBase(node.Left);
+        var right = VisitBase(node.Right);
 
         if (left?.Error != null) return left;
         if (right?.Error != null) return right;

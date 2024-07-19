@@ -3,38 +3,62 @@ using Example.AST;
 
 namespace Example.VisitorImplementations;
 
-public class EvaluationVisitor : VisitorBase<int>
+public class EvaluationVisitor : VisitorBase<object>
 {
-    public int Visit(NumberNode node)
+    public object Visit(NumberNode node)
     {
         return node.Value;
     }
 
-    public int Visit(AdditionNode node)
+    public object? Visit(AdditionNode node)
     {
-        var left = VisitCore(node.Left);
-        var right = VisitCore(node.Right);
-        return left + right;
+        var left = VisitBase(node.Left);
+        var right = VisitBase(node.Right);
+        
+        if (left is int leftInt && right is int rightInt)
+        {
+            return leftInt + rightInt;
+        }
+        
+        return null;
     }
 
-    public int Visit(MultiplicationNode node)
+    public object? Visit(MultiplicationNode node)
     {
-        var left = VisitCore(node.Left);
-        var right = VisitCore(node.Right);
-        return left * right;
+        var left = VisitBase(node.Left);
+        var right = VisitBase(node.Right);
+        
+        if (left is int leftInt && right is int rightInt)
+        {
+            return leftInt * rightInt;
+        }
+        
+        return null;
     }
 
-    public int Visit(SubtractionNode node)
+    public object? Visit(SubtractionNode node)
     {
-        var left = VisitCore(node.Left);
-        var right = VisitCore(node.Right);
-        return left - right;
+        var left = VisitBase(node.Left);
+        var right = VisitBase(node.Right);
+        
+        if (left is int leftInt && right is int rightInt)
+        {
+            return leftInt - rightInt;
+        }
+        
+        return null;
     }
 
-    public int Visit(DivisionNode node)
+    public object? Visit(DivisionNode node)
     {
-        var left = VisitCore(node.Left);
-        var right = VisitCore(node.Right);
-        return left / right;
+        var left = VisitBase(node.Left);
+        var right = VisitBase(node.Right);
+        
+        if (left is int leftInt && right is int rightInt)
+        {
+            return leftInt / rightInt;
+        }
+        
+        return null;
     }
 }

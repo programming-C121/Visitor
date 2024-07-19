@@ -37,8 +37,8 @@ public class FormatVisitor : VisitorBase<string>
         var sb = new StringBuilder();
         var className = node.GetType().Name;
         sb.AppendLine(className);
-        sb.AppendLine(FormatWithIndent($"{VisitCore(node.Left)}", 1));
-        sb.AppendLine(FormatWithIndent($"{VisitCore(node.Right)}", 1));
+        sb.AppendLine(FormatWithIndent($"{VisitBase(node.Left)}", 1));
+        sb.AppendLine(FormatWithIndent($"{VisitBase(node.Right)}", 1));
         return sb.ToString().TrimEnd();
     }
 }
