@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visitor", "Visitor\Visitor.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseVisitor", "BaseVisitor\BaseVisitor.csproj", "{2F036CEA-6D09-40E7-9BB9-CAC274DD9909}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{A469B1B2-967D-426C-8885-5925D9CF81E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{2F036CEA-6D09-40E7-9BB9-CAC274DD9909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F036CEA-6D09-40E7-9BB9-CAC274DD9909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F036CEA-6D09-40E7-9BB9-CAC274DD9909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A469B1B2-967D-426C-8885-5925D9CF81E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A469B1B2-967D-426C-8885-5925D9CF81E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A469B1B2-967D-426C-8885-5925D9CF81E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A469B1B2-967D-426C-8885-5925D9CF81E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
