@@ -2,7 +2,7 @@
 
 namespace Example.AST;
 
-public class DivisionNode : BinaryNode
+public class DivisionNode : ArithmeticBinaryNode
 {
     public DivisionNode(INode left, INode right) : base(left, right)
     {
