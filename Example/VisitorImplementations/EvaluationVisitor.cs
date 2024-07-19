@@ -1,12 +1,12 @@
 using BaseVisitor;
+using BaseVisitor.Interfaces;
 using Example.AST;
-using Example.ASTNodes;
 
 namespace Example.VisitorImplementations;
 
 public class EvaluationVisitor : VisitorBase<object>
 {
-    private Dictionary<string, object?> _variables = new();
+    private Dictionary<string, INode> _variables = new();
 
     public object Visit(NumberNode node)
     {
@@ -67,7 +67,7 @@ public class EvaluationVisitor : VisitorBase<object>
 
     public object? Visit(VariableNode node)
     {
-        return _variables[node.Name];
+        return VisitBase(_variables[node.Name]);
     }
 
     public object? Visit(VariableDeclarationNode node)

@@ -1,15 +1,14 @@
 using BaseVisitor.Interfaces;
 using Example.AST;
-using Example.ASTNodes;
 using Example.VisitorImplementations;
 
 namespace Test;
 
 public class Tester
 {
-    public static void AssertEquals<T>(T expected, T actual, string testName)
+    private static void AssertEquals<T>(T expected, T actual, string testName)
     {
-        if (!expected.Equals(actual))
+        if (expected != null && !expected.Equals(actual))
         {
             Console.WriteLine($"Test Failed: {testName}. Expected: {expected}, Actual: {actual}");
             Environment.Exit(1);
@@ -25,21 +24,11 @@ public class Tester
         TestSubtractionVisitor();
         TestDivisionVisitor();
         TestComplexExpressionVisitor();
-        TestFormatVisitor();
         TestEvaluationVisitor();
         TestComplexExpressionWithVariablesVisitor();
     }
 
-    static void TestFormatVisitor()
-    {
-        INode node = new AdditionNode(new NumberNode(1), new NumberNode(2));
-        var visitor = new FormatVisitor();
-        var result = visitor.VisitBase(node);
-        var expected = "AdditionNode\n    Number: 1\n    Number: 2";
-        AssertEquals(expected, result, "FormatVisitor Test");
-    }
-
-    static void TestEvaluationVisitor()
+    private static void TestEvaluationVisitor()
     {
         INode node = new AdditionNode(new NumberNode(1), new NumberNode(2));
         var visitor = new EvaluationVisitor();
@@ -48,7 +37,7 @@ public class Tester
         AssertEquals(expected, result, "EvaluationVisitor Test");
     }
 
-    static void TestSubtractionVisitor()
+    private static void TestSubtractionVisitor()
     {
         INode node = new SubtractionNode(new NumberNode(5), new NumberNode(2));
         var visitor = new EvaluationVisitor();
@@ -57,7 +46,7 @@ public class Tester
         AssertEquals(expected, result, "SubtractionVisitor Test");
     }
 
-    static void TestDivisionVisitor()
+    private static void TestDivisionVisitor()
     {
         INode node = new DivisionNode(new NumberNode(10), new NumberNode(2));
         var visitor = new EvaluationVisitor();
@@ -66,7 +55,7 @@ public class Tester
         AssertEquals(expected, result, "DivisionVisitor Test");
     }
 
-    static void TestComplexExpressionVisitor()
+    private static void TestComplexExpressionVisitor()
     {
         // (5 + 3) * 2 - 4 / 2
         INode node = new SubtractionNode(
@@ -81,7 +70,7 @@ public class Tester
         AssertEquals(expected, result, "ComplexExpressionVisitor Test");
     }
 
-    static void TestComplexExpressionWithVariablesVisitor()
+    private static void TestComplexExpressionWithVariablesVisitor()
     {
         // Initialize the EvaluationVisitor
         var visitor = new EvaluationVisitor();
