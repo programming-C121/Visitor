@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using BaseVisitor;
 using Example.AST;
+using Example.ASTNodes;
 
 namespace Example.VisitorImplementations;
 
@@ -39,6 +40,19 @@ public class FormatVisitor : VisitorBase<string>
         sb.AppendLine(className);
         sb.AppendLine(FormatWithIndent($"{VisitBase(node.Left)}", 1));
         sb.AppendLine(FormatWithIndent($"{VisitBase(node.Right)}", 1));
+        return sb.ToString().TrimEnd();
+    }
+
+    public string Visit(VariableNode node)
+    {
+        return "Variable: " + node.Name + "\n";
+    }
+
+    public string Visit(VariableDeclarationNode node)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("VariableDeclarationNode: " + node.Name);
+        sb.AppendLine(FormatWithIndent($"{VisitCore(node.Value)}", 1));
         return sb.ToString().TrimEnd();
     }
 }
