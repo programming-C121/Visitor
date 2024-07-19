@@ -52,7 +52,7 @@ public class FormatVisitor : VisitorBase<string>
     {
         var sb = new StringBuilder();
         sb.AppendLine("VariableDeclarationNode: " + node.Name);
-        sb.AppendLine(FormatWithIndent($"{VisitCore(node.Value)}", 1));
+        sb.AppendLine(FormatWithIndent($"{VisitBase(node.Value)}", 1));
         return sb.ToString().TrimEnd();
     }
 }

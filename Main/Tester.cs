@@ -34,7 +34,7 @@ public class Tester
     {
         INode node = new AdditionNode(new NumberNode(1), new NumberNode(2));
         var visitor = new FormatVisitor();
-        var result = visitor.VisitCore(node);
+        var result = visitor.VisitBase(node);
         var expected = "AdditionNode\n    Number: 1\n    Number: 2";
         AssertEquals(expected, result, "FormatVisitor Test");
     }
@@ -43,7 +43,7 @@ public class Tester
     {
         INode node = new AdditionNode(new NumberNode(1), new NumberNode(2));
         var visitor = new EvaluationVisitor();
-        var result = visitor.VisitCore(node);
+        var result = visitor.VisitBase(node);
         var expected = 3;
         AssertEquals(expected, result, "EvaluationVisitor Test");
     }
@@ -52,7 +52,7 @@ public class Tester
     {
         INode node = new SubtractionNode(new NumberNode(5), new NumberNode(2));
         var visitor = new EvaluationVisitor();
-        var result = visitor.VisitCore(node);
+        var result = visitor.VisitBase(node);
         var expected = 3;
         AssertEquals(expected, result, "SubtractionVisitor Test");
     }
@@ -61,7 +61,7 @@ public class Tester
     {
         INode node = new DivisionNode(new NumberNode(10), new NumberNode(2));
         var visitor = new EvaluationVisitor();
-        var result = visitor.VisitCore(node);
+        var result = visitor.VisitBase(node);
         var expected = 5;
         AssertEquals(expected, result, "DivisionVisitor Test");
     }
@@ -76,7 +76,7 @@ public class Tester
             new DivisionNode(new NumberNode(4), new NumberNode(2))
         );
         var visitor = new EvaluationVisitor();
-        var result = visitor.VisitCore(node);
+        var result = visitor.VisitBase(node);
         var expected = 14;
         AssertEquals(expected, result, "ComplexExpressionVisitor Test");
     }
@@ -100,11 +100,11 @@ public class Tester
         );
 
         // Evaluate variable declarations
-        visitor.Visit(varX);
-        visitor.Visit(varY);
+        visitor.VisitBase(varX);
+        visitor.VisitBase(varY);
 
         // Evaluate the complex expression
-        var result = visitor.VisitCore(complexExpression);
+        var result = visitor.VisitBase(complexExpression);
 
         // Expected result calculation: (5 * 2) + (10 / 2) - 3 = 10 + 5 - 3 = 12
         AssertEquals(12, result, "ComplexExpressionWithVariables Test");
