@@ -15,8 +15,3 @@ En compilación, el patrón Visitor se utiliza principalmente para:
 1. Facilita la adición de nuevas operaciones sin modificar las clases de nodos existentes.
 2. Permite agrupar funcionalidades relacionadas en una sola clase visitor.
 3. Mejora la separación de preocupaciones en el compilador, facilita la implementación de diferentes fases de manera modular y extensible.
-
-## Desventajas
-
-1. Puede ser complicado de implementar si la jerarquía de clases del AST cambia frecuentemente.
-2. Puede llevar a un acoplamiento fuerte entre los visitors y la estructura del AST.
