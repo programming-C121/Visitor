@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visitor", "Visitor\Visitor.csproj", "{0AE62DDF-3F66-49AD-85E5-CFA2E55E7964}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program", "Program\Program.csproj", "{0AE62DDF-3F66-49AD-85E5-CFA2E55E7964}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseVisitor", "BaseVisitor\BaseVisitor.csproj", "{2F036CEA-6D09-40E7-9BB9-CAC274DD9909}"
 EndProject
