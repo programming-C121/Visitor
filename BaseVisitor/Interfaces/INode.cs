@@ -1,3 +1,3 @@
 ﻿namespace BaseVisitor.Interfaces;
 
-public interface IExpression;
+public interface INode;

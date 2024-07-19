@@ -1,28 +1,28 @@
 using BaseVisitor;
-using Visitor.ASTNodes;
+using Example.ASTNodes;
 
 namespace Example.VisitorImplementations;
 
-public class EvaluationVisitor : ExpressionVisitorBase<int>
+public class EvaluationVisitor : VisitorBase<int>
 {
 
-    public int Visit(NumberExpression expression)
+    public int Visit(NumberNode node)
     {
-        return expression.Value;
+        return node.Value;
     }
 
-    public int Visit(AdditionExpression expression)
+    public int Visit(AdditionNode node)
     {
         
-        var left = Visit(expression.Left);
-        var right = Visit(expression.Right);
+        var left = Visit(node.Left);
+        var right = Visit(node.Right);
         return left + right;
     }
 
-    public int Visit(MultiplicationExpression expression)
+    public int Visit(MultiplicationNode node)
     {
-        var left = Visit(expression.Left);
-        var right = Visit(expression.Right);
+        var left = Visit(node.Left);
+        var right = Visit(node.Right);
         return left * right;
     }
 }

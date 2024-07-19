@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using BaseVisitor;
-using Visitor.ASTNodes;
+using Example.ASTNodes;
 
 namespace Example.VisitorImplementations;
 
@@ -8,9 +8,9 @@ namespace Example.VisitorImplementations;
 /// A visitor that formats abstract syntax tree (AST) nodes into a human-readable string representation.
 /// This visitor traverses the AST and produces an indented, hierarchical text output of the expression structure.
 /// </summary>
-public class FormatVisitor : ExpressionVisitorBase<string>
+public class FormatVisitor : VisitorBase<string>
 {
-    private const string IndentString = "  "; // Two spaces per indentation level
+    private const string IndentString = "    "; // Four spaces per indentation level
 
     private static string FormatWithIndent(string content, int indentLevel)
     {
@@ -26,26 +26,18 @@ public class FormatVisitor : ExpressionVisitorBase<string>
         return sb.ToString().TrimEnd();
     }
 
-    public string Visit(NumberExpression expression)
+    public string Visit(NumberNode node)
     {
-        return $"Number: {expression.Value}";
+        return $"Number: {node.Value}";
     }
-
-    public string Visit(AdditionExpression expression)
+    
+    public string Visit(BinaryNode node)
     {
         var sb = new StringBuilder();
-        sb.AppendLine("Addition:");
-        sb.AppendLine(FormatWithIndent($"{Visit(expression.Left)}", 1));
-        sb.AppendLine(FormatWithIndent($"{Visit(expression.Right)}", 1));
-        return sb.ToString().TrimEnd();
-    }
-
-    public string Visit(MultiplicationExpression expression)
-    {
-        var sb = new StringBuilder();
-        sb.AppendLine("Multiplication:");
-        sb.AppendLine(FormatWithIndent($"{Visit(expression.Left)}", 1));
-        sb.AppendLine(FormatWithIndent($"{Visit(expression.Right)}", 1));
+        var className = node.GetType().Name;
+        sb.AppendLine(className);
+        sb.AppendLine(FormatWithIndent($"{Visit(node.Left)}", 1));
+        sb.AppendLine(FormatWithIndent($"{Visit(node.Right)}", 1));
         return sb.ToString().TrimEnd();
     }
 }
