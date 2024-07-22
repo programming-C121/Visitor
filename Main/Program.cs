@@ -1,38 +1,30 @@
 ﻿using BaseVisitor.Interfaces;
 using Example.AST;
-using Example.VisitorImplementations;
+using Test;
 
-INode node = new MultiplicationNode(
-    new AdditionNode(
-        new NumberNode(5),
-        new NumberNode(3)
-    ),
+// Create the AST nodes for this example program
+// int x = 5;
+// int y = 10;
+// int z = x + y * 2;
+
+// int x = 5;
+var xDeclaration = new VariableDeclarationNode("x", new NumberNode(5));
+
+// int y = 10;
+var yDeclaration = new VariableDeclarationNode("y", new NumberNode(10));
+
+// int z = x + y * 2;
+var multiplication = new MultiplicationNode(
+    new VariableNode("y"),
     new NumberNode(2)
 );
+var addition = new AdditionNode(
+    new VariableNode("x"),
+    multiplication
+);
+var zDeclaration = new VariableDeclarationNode("z", addition);
 
-var formatVisitor = new FormatVisitor();
-var formatResult = formatVisitor.VisitBase(node);
-Console.WriteLine(formatResult);
+// Create the program node containing all the statements
+var program = new ProgramNode(new List<INode> { xDeclaration, yDeclaration, zDeclaration });
 
-Console.WriteLine("=======================================================");
-
-var semanticCheckVisitor = new SemanticCheckVisitor();
-var semanticCheckResult = semanticCheckVisitor.VisitBase(node);
-if (semanticCheckResult == null)
-{
-    Console.WriteLine("Algo ha salido mal");
-}
-else if (semanticCheckResult.IsSuccess)
-{
-    Console.WriteLine($"Resultado del chequeo semántico: Success, Tipo: {semanticCheckResult.Type.Name}");
-}
-else
-{
-    Console.WriteLine($"Resultado del chequeo semántico: Failure, Error: {semanticCheckResult.Error}");
-}
-
-Console.WriteLine("=======================================================");
-
-var evaluationVisitor = new EvaluationVisitor();
-var evaluationResult = evaluationVisitor.VisitBase(node);
-Console.WriteLine($"Resultado de la evaluación: {evaluationResult}");
+program.Execute(debug: true);

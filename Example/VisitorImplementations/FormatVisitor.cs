@@ -36,7 +36,7 @@ public class FormatVisitor : VisitorBase<string>
     {
         var sb = new StringBuilder();
         var className = node.GetType().Name;
-        sb.AppendLine(className);
+        sb.AppendLine($"{className}:");
         sb.AppendLine(FormatWithIndent($"{VisitBase(node.Left)}", 1));
         sb.AppendLine(FormatWithIndent($"{VisitBase(node.Right)}", 1));
         return sb.ToString().TrimEnd();
@@ -44,14 +44,25 @@ public class FormatVisitor : VisitorBase<string>
 
     public string Visit(VariableNode node)
     {
-        return "Variable: " + node.Name + "\n";
+        return $"Variable: {node.Name}";
     }
 
     public string Visit(VariableDeclarationNode node)
     {
         var sb = new StringBuilder();
-        sb.AppendLine("VariableDeclarationNode: " + node.Name);
+        sb.AppendLine($"VariableDeclaration: {node.Name}");
         sb.AppendLine(FormatWithIndent($"{VisitBase(node.Value)}", 1));
+        return sb.ToString().TrimEnd();
+    }
+
+    public string Visit(ProgramNode node)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("Program:");
+        foreach (var statement in node.Statements)
+        {
+            sb.AppendLine(FormatWithIndent($"{VisitBase(statement)}", 1));
+        }
         return sb.ToString().TrimEnd();
     }
 }
