@@ -2,7 +2,7 @@
 using BaseVisitor;
 using Example.AST;
 
-namespace Example.VisitorImplementations;
+namespace Example.Visitors;
 
 /// <summary>
 /// Visitor that formats abstract syntax tree (AST) nodes into a human-readable string representation.

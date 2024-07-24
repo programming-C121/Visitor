@@ -1,4 +1,4 @@
-﻿namespace Example.VisitorImplementations;
+﻿namespace Example.Visitors;
 
 public class SemanticResult
 {

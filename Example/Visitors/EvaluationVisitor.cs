@@ -1,7 +1,7 @@
 using BaseVisitor;
 using Example.AST;
 
-namespace Example.VisitorImplementations;
+namespace Example.Visitors;
 
 /// <summary>
 /// Visitor that evaluates the abstract syntax tree (AST) and computes the result of the expressions.

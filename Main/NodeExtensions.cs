@@ -1,5 +1,5 @@
 ﻿using BaseVisitor.Interfaces;
-using Example.VisitorImplementations;
+using Example.Visitors;
 
 namespace Test;
 

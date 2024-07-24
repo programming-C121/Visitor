@@ -1,7 +1,7 @@
 ﻿using BaseVisitor;
 using Example.AST;
 
-namespace Example.VisitorImplementations;
+namespace Example.Visitors;
 
 /// <summary>
 /// Visitor that performs semantic checks on the abstract syntax tree (AST).
