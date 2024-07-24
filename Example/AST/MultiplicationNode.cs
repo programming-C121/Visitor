@@ -2,9 +2,4 @@
 
 namespace Example.AST;
 
-public class MultiplicationNode : ArithmeticBinaryNode
-{
-    public MultiplicationNode(INode left, INode right) : base(left, right)
-    {
-    }
-}
+public class MultiplicationNode(INode left, INode right) : ArithmeticBinaryNode(left, right);

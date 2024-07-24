@@ -30,7 +30,7 @@ public abstract class VisitorBase<TResult> : IVisitor<TResult>
             return (TResult?)method.Invoke(this, parameters);
         }
 
-        // If no matching Visit method is found, return default value (null for reference types)
-        return default;
+        // If no matching Visit method is found, throw an exception
+        throw new NotSupportedException($"No Visit method found for {node.GetType().Name} with the given additional parameters");
     }
 }

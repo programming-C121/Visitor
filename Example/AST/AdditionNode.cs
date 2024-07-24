@@ -2,9 +2,4 @@
 
 namespace Example.AST;
 
-public class AdditionNode : ArithmeticBinaryNode
-{
-    public AdditionNode(INode left, INode right) : base(left, right)
-    {
-    }
-}
+public class AdditionNode(INode left, INode right) : ArithmeticBinaryNode(left, right);

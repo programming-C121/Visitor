@@ -1,5 +1,4 @@
-﻿using BaseVisitor.Interfaces;
-using Example.AST;
+﻿using Example.AST;
 using Test;
 
 // Create the AST nodes for this example program
@@ -25,6 +24,6 @@ var addition = new AdditionNode(
 var zDeclaration = new VariableDeclarationNode("z", addition);
 
 // Create the program node containing all the statements
-var program = new ProgramNode(new List<INode> { xDeclaration, yDeclaration, zDeclaration });
+var program = new ProgramNode([xDeclaration, yDeclaration, zDeclaration]);
 
 program.Execute(debug: true);

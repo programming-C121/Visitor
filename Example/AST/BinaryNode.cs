@@ -2,14 +2,8 @@
 
 namespace Example.AST;
 
-public abstract class BinaryNode : INode
+public abstract class BinaryNode(INode left, INode right) : INode
 {
-    public INode Left { get; }
-    public INode Right { get; }
-
-    public BinaryNode(INode left, INode right)
-    {
-        Left = left;
-        Right = right;
-    }
+    public INode Left { get; } = left;
+    public INode Right { get; } = right;
 }

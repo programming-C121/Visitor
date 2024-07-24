@@ -5,7 +5,7 @@ using Example.AST;
 namespace Example.VisitorImplementations;
 
 /// <summary>
-/// A visitor that formats abstract syntax tree (AST) nodes into a human-readable string representation.
+/// Visitor that formats abstract syntax tree (AST) nodes into a human-readable string representation.
 /// This visitor traverses the AST and produces an indented, hierarchical text output of the expression structure.
 /// </summary>
 public class FormatVisitor : VisitorBase<string>
@@ -17,8 +17,7 @@ public class FormatVisitor : VisitorBase<string>
         var sb = new StringBuilder();
         using (var reader = new StringReader(content))
         {
-            string? line;
-            while ((line = reader.ReadLine()) != null)
+            while (reader.ReadLine() is { } line)
             {
                 sb.AppendLine($"{new string(' ', indentLevel * IndentString.Length)}{line}");
             }
@@ -29,7 +28,7 @@ public class FormatVisitor : VisitorBase<string>
 
     public string Visit(NumberNode node)
     {
-        return $"Number: {node.Value}";
+        return $"NumberNode: {node.Value}";
     }
 
     public string Visit(BinaryNode node)
@@ -44,13 +43,13 @@ public class FormatVisitor : VisitorBase<string>
 
     public string Visit(VariableNode node)
     {
-        return $"Variable: {node.Name}";
+        return $"VariableNode: {node.Name}";
     }
 
     public string Visit(VariableDeclarationNode node)
     {
         var sb = new StringBuilder();
-        sb.AppendLine($"VariableDeclaration: {node.Name}");
+        sb.AppendLine($"VariableDeclarationNode: {node.Name}");
         sb.AppendLine(FormatWithIndent($"{VisitBase(node.Value)}", 1));
         return sb.ToString().TrimEnd();
     }
@@ -58,11 +57,12 @@ public class FormatVisitor : VisitorBase<string>
     public string Visit(ProgramNode node)
     {
         var sb = new StringBuilder();
-        sb.AppendLine("Program:");
+        sb.AppendLine("ProgramNode:");
         foreach (var statement in node.Statements)
         {
             sb.AppendLine(FormatWithIndent($"{VisitBase(statement)}", 1));
         }
+
         return sb.ToString().TrimEnd();
     }
 }

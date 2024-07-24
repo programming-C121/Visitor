@@ -1,66 +1,78 @@
 ﻿using BaseVisitor.Interfaces;
 using Example.VisitorImplementations;
 
-namespace Test
+namespace Test;
+
+public static class NodeExtensions
 {
-    public static class NodeExtensions
+    /// <summary>
+    /// Executes the node processing, performing semantic checks and evaluation.
+    /// </summary>
+    /// <param name="node">The node to be processed, implementing the <see cref="INode"/> interface.</param>
+    /// <param name="debug">
+    /// A boolean flag indicating whether to output debug information.
+    /// If set to true, additional details about the processing will be printed to the console.
+    /// </param>
+    public static void Execute(this INode node, bool debug = false)
     {
-        public static void Execute(this INode node, bool debug = false)
+        if (debug)
         {
-            if (debug)
-            {
-                PrintFormattedAst(node);
-            }
-
-            var semanticResult = PerformSemanticCheck(node);
-            if (!semanticResult.IsSuccess)
-            {
-                return;
-            }
-
-            EvaluateNode(node);
+            PrintFormattedAst(node);
         }
 
-        private static void PrintFormattedAst(INode node)
+        if (CheckSemanticValidity(node, debug))
         {
-            var formatVisitor = new FormatVisitor();
-            var formatResult = formatVisitor.VisitBase(node);
-            Console.WriteLine(formatResult);
+            EvaluateNode(node, debug);
+        }
+    }
+
+    private static void PrintFormattedAst(INode node)
+    {
+        var formatVisitor = new FormatVisitor();
+        var formattedAst = formatVisitor.VisitBase(node);
+        Console.WriteLine(formattedAst);
+        PrintSeparator();
+    }
+
+    private static bool CheckSemanticValidity(INode node, bool debug)
+    {
+        var semanticCheckVisitor = new SemanticCheckVisitor();
+        var semanticCheckResult = semanticCheckVisitor.VisitBase(node);
+
+        if (semanticCheckResult == null)
+        {
+            throw new InvalidOperationException("Unexpected error: The result of the semantic check is null.");
+        }
+
+        if (!semanticCheckResult.IsSuccess)
+        {
+            Console.WriteLine($"Semantic check failed: {semanticCheckResult.Error}");
+            return false;
+        }
+
+        if (debug)
+        {
+            Console.WriteLine($"Semantic check successful. Type: {semanticCheckResult.Type.Name}");
             PrintSeparator();
         }
 
-        private static SemanticResult PerformSemanticCheck(INode node)
+        return true;
+    }
+
+    private static void EvaluateNode(INode node, bool debug)
+    {
+        var evaluationVisitor = new EvaluationVisitor();
+        var evaluationResult = evaluationVisitor.VisitBase(node);
+
+        if (debug)
         {
-            var semanticCheckVisitor = new SemanticCheckVisitor();
-            var semanticCheckResult = semanticCheckVisitor.VisitBase(node);
-
-            if (semanticCheckResult == null)
-            {
-                Console.WriteLine("Error inesperado: El resultado del chequeo semántico es nulo.");
-                return SemanticResult.Failure("Resultado nulo");
-            }
-
-            if (!semanticCheckResult.IsSuccess)
-            {
-                Console.WriteLine($"Chequeo semántico fallido: {semanticCheckResult.Error}");
-                return semanticCheckResult;
-            }
-
-            Console.WriteLine($"Chequeo semántico exitoso. Tipo: {semanticCheckResult.Type.Name}");
+            Console.WriteLine($"Evaluation result: {evaluationResult ?? "Null"}");
             PrintSeparator();
-            return semanticCheckResult;
         }
+    }
 
-        private static void EvaluateNode(INode node)
-        {
-            var evaluationVisitor = new EvaluationVisitor();
-            var evaluationResult = evaluationVisitor.VisitBase(node);
-            Console.WriteLine($"Resultado de la evaluación: {evaluationResult ?? "Nulo"}");
-        }
-
-        private static void PrintSeparator()
-        {
-            Console.WriteLine(new string('=', 70));
-        }
+    private static void PrintSeparator()
+    {
+        Console.WriteLine(new string('=', 70));
     }
 }

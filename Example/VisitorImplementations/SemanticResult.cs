@@ -4,7 +4,7 @@ public class SemanticResult
 {
     public Type Type { get; }
     public string? Error { get; }
-    
+
     public bool IsSuccess => Error == null;
 
     private SemanticResult(Type type, string? error = null)

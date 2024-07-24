@@ -2,12 +2,7 @@
 
 namespace Example.AST;
 
-public class ProgramNode : INode
+public class ProgramNode(List<INode> statements) : INode
 {
-    public List<INode> Statements { get;}
-    
-    public ProgramNode(List<INode> statements)
-    {
-        Statements = statements;
-    }
+    public List<INode> Statements { get; } = statements;
 }

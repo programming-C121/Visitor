@@ -2,14 +2,8 @@ using BaseVisitor.Interfaces;
 
 namespace Example.AST;
 
-public class VariableDeclarationNode : INode
+public class VariableDeclarationNode(string name, INode value) : INode
 {
-    public string Name { get; }
-    public INode Value { get; }
-
-    public VariableDeclarationNode(string name, INode value)
-    {
-        Name = name;
-        Value = value;
-    }
+    public string Name { get; } = name;
+    public INode Value { get; } = value;
 }

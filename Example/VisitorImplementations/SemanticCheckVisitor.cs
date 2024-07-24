@@ -38,11 +38,11 @@ public class SemanticCheckVisitor : VisitorBase<SemanticResult>
         // If both operands are int, the operation is valid and the result will be int
         return SemanticResult.Success(typeof(int));
     }
-    
+
     public SemanticResult Visit(ProgramNode node)
     {
         SemanticResult? lastResult = null;
-        
+
         // Iterate over all statements in the program abd return the last result
         foreach (var result in node.Statements.Select(statement => VisitBase(statement)))
         {
@@ -50,13 +50,14 @@ public class SemanticCheckVisitor : VisitorBase<SemanticResult>
             {
                 return result; // Propagate the error
             }
+
             lastResult = result;
         }
-        
+
         // Returns the result of the last statement
         return lastResult ?? SemanticResult.Failure("Cannot identify program type");
     }
-    
+
     public SemanticResult Visit(VariableDeclarationNode node)
     {
         // Perform semantic check on the value of the variable
@@ -65,7 +66,7 @@ public class SemanticCheckVisitor : VisitorBase<SemanticResult>
         {
             return valueResult; // Propagate the error
         }
-        
+
         // Check if the variable is already declared
         if (_variables.ContainsKey(node.Name))
         {
@@ -77,7 +78,6 @@ public class SemanticCheckVisitor : VisitorBase<SemanticResult>
         return SemanticResult.Success(valueResult.Type); // Declaration doesn't have a specific return type
     }
 
-    
     public SemanticResult Visit(VariableNode node)
     {
         // Check if the variable is declared

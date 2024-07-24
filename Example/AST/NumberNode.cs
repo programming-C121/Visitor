@@ -2,12 +2,7 @@
 
 namespace Example.AST;
 
-public class NumberNode : INode
+public class NumberNode(int value) : INode
 {
-    public int Value { get; }
-
-    public NumberNode(int value)
-    {
-        Value = value;
-    }
+    public int Value { get; } = value;
 }
