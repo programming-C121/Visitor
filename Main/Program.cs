@@ -2,17 +2,17 @@
 using Test;
 
 // Create the AST nodes for this example program
-// int x = 5;
-// int y = 10;
-// int z = x + y * 2;
+// x = 5;
+// y = 10;
+// z = x + y * 2;
 
-// int x = 5;
+// x = 5;
 var xDeclaration = new VariableDeclarationNode("x", new NumberNode(5));
 
-// int y = 10;
+// y = 10;
 var yDeclaration = new VariableDeclarationNode("y", new NumberNode(10));
 
-// int z = x + y * 2;
+// z = x + y * 2;
 var multiplication = new MultiplicationNode(
     new VariableNode("y"),
     new NumberNode(2)
